@@ -1,23 +1,312 @@
 <!DOCTYPE html>
 <html lang="hr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feliks Mont j.d.o.o</title>
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; }
-    header, nav, footer { background: #333; color: #fff; padding: 10px 20px; }
-    nav a { color: #fff; margin-right: 15px; text-decoration: none; }
-    main { padding: 20px; }
-    h1, h2 { color: #333; }
-    .section { margin-bottom: 40px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    footer { text-align: center; font-size: 0.9em; }
-    .logo { max-width: 150px; margin-bottom: 10px; }
-    .gallery img { max-width: 100%; height: auto; margin: 10px 0; border: 1px solid #ccc; }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header,
+    nav,
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    nav a {
+      color: #fff;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .logo {
+      max-width: 150px;
+      margin-bottom: 10px;
+    }
+
+    .gallery img {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+    }
+
+
+    /*-- -------------------------- -->
+    <---          Gallery           -->
+    <--- -------------------------- -*/
+    /* Mobile - 360px */
+    @media only screen and (min-width: 0rem) {
+      #gallery-404 {
+        padding: var(--sectionPadding);
+        overflow: hidden;
+        position: relative;
+      }
+
+      #gallery-404 .cs-container {
+        width: 100%;
+        /* changes to 1280px at tablet */
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+        position: relative;
+      }
+
+      #gallery-404 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+      }
+
+      #gallery-404 .cs-title {
+        max-width: 20ch;
+      }
+
+      #gallery-404 .cs-button-group {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+        column-gap: 2rem;
+      }
+
+      #gallery-404 .cs-button {
+        font-size: 1rem;
+        line-height: 1.5em;
+        color: var(--bodyTextColor);
+        background-color: transparent;
+        border: none;
+        transition: color 0.3s;
+      }
+
+      #gallery-404 .cs-button:hover {
+        color: var(--primary);
+        cursor: pointer;
+      }
+
+      #gallery-404 .cs-button.cs-active {
+        color: var(--primary);
+      }
+
+      #gallery-404 .cs-gallery-wrapper {
+        width: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      #gallery-404 .cs-gallery {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        /* 16px - 20px */
+        gap: clamp(1rem, 1.5vw, 1.25rem);
+        transition: transform 0.7s, opacity 0.3s, visibility 0.5s, top 0.3s, left 0.3s;
+        /* makes the transform scaling origin the top left corner, dictates the direction by which the scale transforms animate towards */
+        transform-origin: left top;
+      }
+
+      #gallery-404 .cs-gallery.cs-hidden {
+        /* by using visibility:hidden instead of display:none, we can see the animations from the opacity and transforms, display:none won't render animations. */
+        visibility: hidden;
+        /* prevents the mouse from interacting with it */
+        pointer-events: none;
+        /* hidden galleries have a 0 opacity, and we animate the opacity to 1 when they become active */
+        opacity: 0;
+        /* this top and left value help control the animation, by setting it to position absolute and left 0, the gallery won't fly off screen to the left, it will stop its position to be at the left edge of the .cs-container (left: 0). Same for the top:0 value, the gallery won't go past that position when it animates */
+        top: 0;
+        left: 0;
+        position: absolute;
+        /* prevents the hidden galleries from overflowing the section, and makes a nice animations to transition to and from */
+        transform: scaleY(0) scaleX(0);
+      }
+
+      #gallery-404 .cs-gallery.cs-hidden .cs-image {
+        /* when gallery is hidden, add these styles to the cs-image to animate from when cs-hidden is removed from the .cs-gallery */
+        transform: translateY(2.1875rem);
+        opacity: 0;
+      }
+
+      #gallery-404 .cs-image {
+        border-radius: 1.25rem;
+        width: 47%;
+        aspect-ratio: 1;
+        /* clips the image corners */
+        overflow: hidden;
+        display: block;
+        position: relative;
+        /* when .cs-hidden is removed from the .cs-gallery, reset these values and animate between their hidden styles */
+        transform: translateY(0rem);
+        opacity: 1;
+        transition: opacity 0.6s, transform 0.6s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(1) {
+        /* changes transition delays at desktop */
+        /* these delays stagger the reveal of each image so they all go one after the other and not all at once */
+        transition-delay: 0.15s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(2) {
+        transition-delay: 0.3s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(3) {
+        transition-delay: 0.45s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(4) {
+        transition-delay: 0.6s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(5) {
+        transition-delay: 0.75s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(6) {
+        transition-delay: 0.9s;
+      }
+
+      #gallery-404 .cs-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* makes it act like a background image */
+        object-fit: cover;
+      }
+    }
+
+    /* Tablet - 768px */
+    @media only screen and (min-width: 48rem) {
+      #gallery-404 .cs-container {
+        max-width: 80rem;
+      }
+
+      #gallery-404 .cs-content {
+        text-align: left;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      #gallery-404 .cs-title {
+        margin: 0;
+      }
+
+      #gallery-404 .cs-image {
+        width: 31.8%;
+        aspect-ratio: 1;
+      }
+    }
+
+    /* Desktop - 1300px */
+    @media only screen and (min-width: 81.25rem) {
+      #gallery-404 .cs-flex {
+        max-width: 34.375rem;
+      }
+
+      #gallery-404 .cs-gallery {
+        align-items: stretch;
+        justify-content: center;
+      }
+
+      #gallery-404 .cs-image {
+        width: 39.375rem;
+        max-width: 100%;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(2),
+      #gallery-404 .cs-image:nth-of-type(3),
+      #gallery-404 .cs-image:nth-of-type(4),
+      #gallery-404 .cs-image:nth-of-type(5) {
+        width: 19.0625rem;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(1) {
+        /* these delays stagger the reveal of each image so they all go one after the other and not all at once */
+        transition-delay: 0.15s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(2) {
+        transition-delay: 0.3s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(3) {
+        transition-delay: 0.45s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(4) {
+        transition-delay: 0.15s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(5) {
+        transition-delay: 0.3s;
+      }
+
+      #gallery-404 .cs-image:nth-of-type(6) {
+        transition-delay: 0.45s;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header>
     <h1>Feliks Mont j.d.o.o</h1>
@@ -27,7 +316,7 @@
   <nav>
     <a href="#o-nama">O nama</a>
     <a href="#usluge">Usluge i cijene</a>
-    <a href="#galerija">Galerija</a>
+    <a href="#gallery-404">Galerija</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
 
@@ -35,27 +324,90 @@
     <section id="o-nama" class="section">
       <h2>O nama</h2>
       <p>Feliks Mont j.d.o.o je poduzeće za montažu, servis, čišćenje klima uređaja i ventilacijskih sustava.</p>
-      <p>Novootvoreno smo poduzeće za usluge montaže, servisa i čišćenja svih vrsta klima uređaja i ventilacijskih sustava. Težimo za dokazivanjem te zbog toga puno pažnje posvećujemo korisnicima naših usluga.</p>
-      <p>Svjesni smo činjenice da je u današnje vrijeme teško dobiti kvalitetu po povoljnijoj cijeni, pa smo upravo zbog toga osnovali ovo poduzeće koje Vaše želje i kvalitetu usluge stavlja na prvo mjesto.</p>
+      <p>Novootvoreno smo poduzeće za usluge montaže, servisa i čišćenja svih vrsta klima uređaja i ventilacijskih
+        sustava. Težimo za dokazivanjem te zbog toga puno pažnje posvećujemo korisnicima naših usluga.</p>
+      <p>Svjesni smo činjenice da je u današnje vrijeme teško dobiti kvalitetu po povoljnijoj cijeni, pa smo upravo zbog
+        toga osnovali ovo poduzeće koje Vaše želje i kvalitetu usluge stavlja na prvo mjesto.</p>
     </section>
 
     <section id="usluge" class="section">
       <h2>Usluge i cijene (bez PDV-a)</h2>
       <table>
-        <tr><th>Usluga</th><th>Cijena</th></tr>
-        <tr><td>Montaža klima uređaja 3,5 KW</td><td>250€</td></tr>
-        <tr><td>Montaža klima uređaja 5,5 KW</td><td>300€</td></tr>
-        <tr><td>Montaža klima uređaja 7 KW</td><td>350€</td></tr>
-        <tr><td>Demontaža klima uređaja</td><td>30€</td></tr>
-        <tr><td>Dodatan metar instalacija</td><td>20€</td></tr>
-        <tr><td>Bušenje dodatne rupe</td><td>15€</td></tr>
-        <tr><td>Servis klima uređaja</td><td>50€</td></tr>
+        <tr>
+          <th>Usluga</th>
+          <th>Cijena</th>
+        </tr>
+        <tr>
+          <td>Montaža klima uređaja 3,5 KW</td>
+          <td>250€</td>
+        </tr>
+        <tr>
+          <td>Montaža klima uređaja 5,5 KW</td>
+          <td>300€</td>
+        </tr>
+        <tr>
+          <td>Montaža klima uređaja 7 KW</td>
+          <td>350€</td>
+        </tr>
+        <tr>
+          <td>Demontaža klima uređaja</td>
+          <td>30€</td>
+        </tr>
+        <tr>
+          <td>Dodatan metar instalacija</td>
+          <td>20€</td>
+        </tr>
+        <tr>
+          <td>Bušenje dodatne rupe</td>
+          <td>15€</td>
+        </tr>
+        <tr>
+          <td>Servis klima uređaja</td>
+          <td>50€</td>
+        </tr>
       </table>
     </section>
 
-    <section id="galerija" class="section">
+    <section id="gallery-404" class="section">
       <h2>Galerija</h2>
-      <p>Galerija će biti prikazana kada se slike dodaju.</p>
+      <div class="cs-gallery-wrapper">
+        <div class="cs-gallery" data-category="one">
+          <picture class="cs-image"><img loading="lazy" decoding="async" src="./static/0031.jpg" alt="gallery"></picture>
+          <picture class="cs-image"><img loading="lazy" decoding="async" src="./static/0001.jpg" alt="gallery"></picture>
+          <picture class="cs-image"><img loading="lazy" decoding="async" src="./static/0002.jpg" alt="gallery"></picture>
+          <picture class="cs-image"><img loading="lazy" decoding="async" src="./static/0003.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0004.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0005.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0006.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0007.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0008.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0009.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0010.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0011.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0012.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0013.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0014.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0015.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0016.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0017.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0018.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0019.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0020.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0021.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0022.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0023.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0024.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0025.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0026.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0027.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0028.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0029.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0030.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0032.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0033.jpg" alt="gallery"></picture>
+          <picture class="cs-image"> <img loading="lazy" decoding="async" src="./static/0034.jpg" alt="gallery"></picture>
+        </div>
+      </div>
     </section>
 
     <section id="kontakt" class="section">
@@ -71,4 +423,5 @@
     <p>&copy; 2025 Feliks Mont j.d.o.o - Sva prava pridržana</p>
   </footer>
 </body>
+
 </html>
