@@ -13,6 +13,22 @@
       padding: 0;
     }
 
+    .header-img {
+      align-self: center;
+      text-align: center;
+      filter: brightness(2000%) grayscale();
+      width: 200px;
+    }
+
+    .title {
+      color: white;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+    }
+
     header,
     nav,
     footer {
@@ -309,7 +325,8 @@
 
 <body>
   <header>
-    <h1>Feliks Mont j.d.o.o</h1>
+    <img src="./static/0031.png" alt="Logo" class="header-img" />
+    <h1 class="title">Feliks Mont j.d.o.o</h1>
     <p>Montaža, servis i čišćenje klima uređaja i ventilacijskih sustava</p>
   </header>
 
